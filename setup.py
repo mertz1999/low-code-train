@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='lctrain',
+    name='lc_train',
     version='1.0.1',
     packages=find_packages(),
     description='A python package for training models in Pytorch easier than before',
