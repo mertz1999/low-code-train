@@ -1,6 +1,6 @@
 from tqdm import tqdm
 import torch
-from lc_train.classification.test import validation
+from .test import validation
 import os
 
 def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=False, project='./'):
