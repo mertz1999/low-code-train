@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='mypackage',
-    version='0.1',
+    name='lctrain',
+    version='1.0.1',
     packages=find_packages(),
-    description='A simple example Python package',
+    description='A python package for training models in Pytorch easier than before',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author='Reza Tanakizadeh',
