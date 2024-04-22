@@ -30,7 +30,7 @@ def validation(test_loader, model, criterion):
     
     # save train acc and loss
     current_accuracy = 100 * correct / total
-
+    print("Accuracy: ", round(current_accuracy,2), "Loss: ", round(total_loss / len(test_loader), 3))
     return current_accuracy, total_loss / len(test_loader)
 
 
