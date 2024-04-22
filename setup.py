@@ -2,19 +2,20 @@ from setuptools import setup, find_packages
 
 setup(
     name='lc_train',
-    version='1.0.1',
+    version='1.1.0',
     packages=find_packages(),
     description='A python package for training models in Pytorch easier than before',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author='Reza Tanakizadeh',
-    author_email='your.email@example.com',
+    author_email='reza.tz780210@gmail.com',
     url='https://github.com/mertz1999/low-code-train',
     license='MIT',
     install_requires=[
-        # List all packages that your package depends on:
         'numpy',
         'pandas',
+        'tqdm',
+        'matplotlib',
     ],
     python_requires='>=3.6',
     classifiers=[
