@@ -4,7 +4,7 @@ import torch
 def validation(test_loader, model, criterion):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    model.train()
+    model.eval()
     total = 0
     correct = 0
     total_loss = 0
