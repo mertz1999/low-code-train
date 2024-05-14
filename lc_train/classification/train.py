@@ -4,6 +4,7 @@ from .test import validation
 import os
 
 def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=False, project='./'):
+    model.train()
     print('\n(info) Start training')
     # load pre-trained model for resume
     if resume:
