@@ -3,7 +3,7 @@ import torch
 from .test import validation
 import os
 
-def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=False, project='./'):
+def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=False, project='./', opt_reload=False):
     model.train()
     print('\n(info) Start training')
     # load pre-trained model for resume
@@ -12,7 +12,8 @@ def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=Fa
             # load model and it's different parts
             loaded = torch.load(os.path.join(project,'last.pth'))
             model.load_state_dict(loaded['model'])
-            optimizer.load_state_dict(loaded['optimizer'])
+            if not opt_reload:
+                optimizer.load_state_dict(loaded['optimizer'])
             start_epoch = loaded['epoch']
             epoch_train_losses,epoch_train_accuracies,epoch_test_losses,epoch_test_accuracies = loaded['history']
             print(f"(info) model is loaded from {os.path.join(project, 'last.pth')}")
