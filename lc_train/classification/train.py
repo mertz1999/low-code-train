@@ -76,7 +76,7 @@ def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=Fa
             'history'  : (epoch_train_losses,epoch_train_accuracies,epoch_test_losses,epoch_test_accuracies)
             }, os.path.join(project,'last.pth'))
 
-        if acc > max(epoch_test_accuracies):
+        if acc > max(epoch_test_accuracies[:-1]):
             torch.save(model.state_dict(), os.path.join(project,'best.pth'))
             print('(info) Best model is saved!')
 
