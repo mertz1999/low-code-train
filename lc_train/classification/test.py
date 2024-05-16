@@ -1,7 +1,7 @@
 from tqdm import tqdm
 import torch
 
-def validation(test_loader, model, criterion):
+def validation(test_loader, model, criterion, print_out = True):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     model.eval()
@@ -30,7 +30,8 @@ def validation(test_loader, model, criterion):
     
     # save train acc and loss
     current_accuracy = 100 * correct / total
-    print("Accuracy: ", round(current_accuracy,2), "Loss: ", round(total_loss / len(test_loader), 3))
+    if print_out:
+        print("Accuracy: ", round(current_accuracy,2), "Loss: ", round(total_loss / len(test_loader), 3))
     return current_accuracy, total_loss / len(test_loader)
 
 
