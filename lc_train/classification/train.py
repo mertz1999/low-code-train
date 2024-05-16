@@ -65,7 +65,7 @@ def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=Fa
         epoch_train_accuracies.append(current_accuracy)
 
         # make validation
-        acc, loss = validation(test_loader, model, criterion)
+        acc, loss = validation(test_loader, model, criterion,print_out=False)
         epoch_test_losses.append(loss)
         epoch_test_accuracies.append(acc)
 
