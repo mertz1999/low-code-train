@@ -3,7 +3,7 @@ import torch
 from .test import validation
 import os
 
-def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=False, project='./', opt_reload=False):
+def fit(train_loder, test_loader, model, optimizer, scheduler, criterion, epochs, resume=False, project='./', opt_reload=False):
     model.train()
     print('\n(info) Start training')
     # load pre-trained model for resume
@@ -14,6 +14,7 @@ def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=Fa
             model.load_state_dict(loaded['model'])
             if not opt_reload:
                 optimizer.load_state_dict(loaded['optimizer'])
+                scheduler.load_state_dict(loaded['scheduler'])
             start_epoch = loaded['epoch']
             epoch_train_losses,epoch_train_accuracies,epoch_test_losses,epoch_test_accuracies = loaded['history']
             print(f"(info) model is loaded from {os.path.join(project, 'last.pth')}")
@@ -49,6 +50,7 @@ def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=Fa
                 loss    = criterion(outputs, targets)
                 loss.backward()
                 optimizer.step()
+                scheduler.step()
 
                 # save all information
                 _, predicted = torch.max(outputs.data, 1)
@@ -74,6 +76,7 @@ def fit(train_loder, test_loader, model, optimizer, criterion, epochs, resume=Fa
             'epoch'    : epoch,
             'model'    : model.state_dict(),
             'optimizer': optimizer.state_dict(),
+            'scheduler': scheduler.state_dict()
             'history'  : (epoch_train_losses,epoch_train_accuracies,epoch_test_losses,epoch_test_accuracies)
             }, os.path.join(project,'last.pth'))
 
