@@ -76,7 +76,7 @@ def fit(train_loder, test_loader, model, optimizer, scheduler, criterion, epochs
             'epoch'    : epoch,
             'model'    : model.state_dict(),
             'optimizer': optimizer.state_dict(),
-            'scheduler': scheduler.state_dict()
+            'scheduler': scheduler.state_dict(),
             'history'  : (epoch_train_losses,epoch_train_accuracies,epoch_test_losses,epoch_test_accuracies)
             }, os.path.join(project,'last.pth'))
 
