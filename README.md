@@ -18,7 +18,7 @@ for using this package you need to define dataloader for classification and also
 ```python
 from lc_train.classification import train
 
-train.fit(trainloader, testloader, model, optimizer, criterion, epochs, resume=False, project='./')
+train.fit(trainloader, testloader, model, optimizer, scheduler, criterion, epochs, resume=False, project='./')
 ```
 
 consider that this training will save model in 2 format. First the best model accuracy will be save only state dict with the name of **best.pth** and also in each epoch it will save a lot of information in **last.pth** model file. 
