@@ -50,7 +50,7 @@ def fit(train_loder, test_loader, model, optimizer, scheduler, criterion, epochs
                 loss    = criterion(outputs, targets)
                 loss.backward()
                 optimizer.step()
-                scheduler.step()
+                
 
                 # save all information
                 _, predicted = torch.max(outputs.data, 1)
@@ -85,7 +85,7 @@ def fit(train_loder, test_loader, model, optimizer, scheduler, criterion, epochs
                 torch.save(model.state_dict(), os.path.join(project,'best.pth'))
                 print('(info) Best model is saved!')
 
-        
+        scheduler.step()
         print(f'Epoch {epoch+1} : Valid Accuracy {round(acc,3)}\t Valid Loss {round(loss,3)}\t Train Accu {round(current_accuracy,3)}\t Train Loss {round(total_loss / len(train_loder),3)}')
 
 
