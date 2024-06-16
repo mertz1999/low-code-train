@@ -3,7 +3,7 @@ import torch
 from .test import validation
 import os
 
-def fit(train_loder, test_loader, model, optimizer, scheduler, criterion, epochs, resume=False, project='./', opt_reload=False):
+def fit(train_loder, test_loader, model, optimizer, scheduler, criterion, epochs, resume=False, project='./', opt_reload=False, multi_class=True):
     model.train()
     print('\n(info) Start training')
     # load pre-trained model for resume
@@ -53,7 +53,10 @@ def fit(train_loder, test_loader, model, optimizer, scheduler, criterion, epochs
                 
 
                 # save all information
-                _, predicted = torch.max(outputs.data, 1)
+                if multi_class:
+                    _, predicted = torch.max(outputs.data, 1)
+                else:
+                    predicted = (outputs > 0.5).float()
                 total       += targets.size(0)
                 correct     += (predicted == targets).sum().item()
                 total_loss  += loss.item()
@@ -67,7 +70,7 @@ def fit(train_loder, test_loader, model, optimizer, scheduler, criterion, epochs
         epoch_train_accuracies.append(current_accuracy)
 
         # make validation
-        acc, loss = validation(test_loader, model, criterion,print_out=False)
+        acc, loss = validation(test_loader, model, criterion,print_out=False, multi_class=multi_class)
         epoch_test_losses.append(loss)
         epoch_test_accuracies.append(acc)
 
