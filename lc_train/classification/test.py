@@ -1,7 +1,7 @@
 from tqdm import tqdm
 import torch
 
-def validation(test_loader, model, criterion, print_out = True):
+def validation(test_loader, model, criterion, print_out = True, multi_class=True):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     model.eval()
@@ -21,7 +21,11 @@ def validation(test_loader, model, criterion, print_out = True):
             loss    = criterion(outputs, targets)
 
             # save all information
-            _, predicted = torch.max(outputs.data, 1)
+            if multi_class:
+                _, predicted = torch.max(outputs.data, 1)
+            else:
+                predicted = (outputs > 0.5).float()
+                    
             total       += targets.size(0)
             correct     += (predicted == targets).sum().item()
             total_loss  += loss.item()    
