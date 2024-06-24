@@ -17,7 +17,7 @@ def validation(test_loader, model, criterion, print_out = True, multi_class=True
             data, targets = data.to(device), targets.to(device)
 
             # get model output and loss and optim
-            outputs = model(data)
+            outputs = model(data.float())
             loss    = criterion(outputs, targets)
 
             # save all information
