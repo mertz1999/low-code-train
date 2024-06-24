@@ -46,7 +46,7 @@ def fit(train_loder, test_loader, model, optimizer, scheduler, criterion, epochs
                 optimizer.zero_grad()
 
                 # get model output and loss and optim
-                outputs = model(data)
+                outputs = model(data.float())
                 loss    = criterion(outputs, targets)
                 loss.backward()
                 optimizer.step()
